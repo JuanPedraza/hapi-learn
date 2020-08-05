@@ -1,0 +1,21 @@
+{
+  "name": "overflow",
+  "version": "1.0.0",
+  "description": "Clone Stackoverflow",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon",
+    "lint": "standard",
+    "lint-fix": "standard --fix",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "@Juan_pedraza",
+  "license": "MIT",
+  "devDependencies": {
+    "nodemon": "^2.0.4",
+    "standard": "^14.3.4"
+  },
+  "dependencies": {
+    "@hapi/hapi": "^19.2.0"
+  }
+}
