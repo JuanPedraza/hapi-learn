@@ -9,6 +9,7 @@ firebase.initializeApp({
 })
 
 const db = firebase.database()
+
 const Users = require('./users')
 
 module.exports = {
