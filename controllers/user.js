@@ -2,6 +2,8 @@
 
 const { func } = require('joi')
 
+const Boom = require('@hapi/boom')
+
 const users = require('../models/index').users
 
 async function createUser (req, h) {
@@ -13,6 +15,11 @@ async function createUser (req, h) {
         return h.response('Problemas creando el usuario').code(500)
     }
     return h.response(`Usuario creado ID: ${result}`)
+}
+
+function logout(req,h) {
+    return h.redirect('/login').unstate('user')
+    
 }
 
 async function validateUser(req,h) {
@@ -34,7 +41,16 @@ async function validateUser(req,h) {
     
 }
 
+function failValidation(req,h, err) {
+    let error = Boom.badRequest('Falló la validación', req.payload)
+    throw error
+
+    
+}
+
 module.exports = {
     createUser,
-    validateUser
+    logout,
+    validateUser,
+    failValidation
 }
