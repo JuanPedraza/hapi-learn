@@ -4,6 +4,7 @@ const Joi = require('joi')
 const site = require('./controllers/site')
 const user = require('./controllers/user')
 const { users } = require('./models')
+const question = require('./controllers/question')
 
 module.exports = 
 [
@@ -48,6 +49,12 @@ module.exports =
 },
 
 {
+    method: 'GET',
+    path: '/ask',
+    handler: site.ask
+},
+
+{
     path: '/validate-user',
     method: 'POST',
     options: {
@@ -62,6 +69,20 @@ module.exports =
     handler: user.validateUser
 },
 
+{
+    path: '/create-question',
+    method: 'POST',
+    options: {
+        validate: {
+            payload: Joi.object({
+                title: Joi.string().required(),
+                description: Joi.string().required()
+            }),
+            failAction: user.failValidation
+        }
+    },
+    handler: question.createQuestion
+},
 
 
 {
