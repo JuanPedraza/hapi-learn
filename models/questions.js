@@ -7,13 +7,23 @@ class Questions{
         this.collection = this.ref.child('questions')
     }
 
-    async create (data,user){
-        const ask = {
-            ...data
+    async create (info,user, filename){
+        // const ask = {
+        //     ...data
+        // }
+        // ask.owner = user
+        const data = {
+            description: info.description,
+            title: info.title,
+            owner: user
         }
-        ask.owner = user
+
+        if(filename){
+            data.filename = filename
+        }
+
         const question = this.collection.push()
-        question.set(ask)
+        question.set(data)
 
         return question.key
     }
@@ -63,4 +73,4 @@ class Questions{
 
 }
 
-module.exports = Questions
+module.exports = Questions;

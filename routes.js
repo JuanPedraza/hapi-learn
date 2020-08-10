@@ -11,6 +11,12 @@ module.exports =
 {
     method: 'GET',
     path: '/',
+    options: {
+        cache: {
+            expiresIn: 1000 * 30,
+            privacy: 'private'
+        }
+    },
     handler: site.home
 },
 
@@ -84,7 +90,8 @@ module.exports =
         validate: {
             payload: Joi.object({
                 title: Joi.string().required(),
-                description: Joi.string().required()
+                description: Joi.string().required(),
+                image: Joi.any().optional()
             }),
             failAction: user.failValidation
         }
@@ -105,6 +112,12 @@ module.exports =
         }
     },
     handler: question.answerQuestion
+},
+
+{
+    method: 'GET',
+    path: '/answer/{questionId}/{answerId}',
+    handler: question.setAnswerRight
 },
 
 
